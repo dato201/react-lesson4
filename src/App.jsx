@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import React from 'react';
 import './App.css'
 
@@ -19,21 +18,20 @@ class App extends React.Component {
     ]
   }
   render() {
-    let users = this.generateUsers
+    let users = this.generateUsers.filter(person => person.show === true)
 
     let usersCount = users.length
     document.title = `${usersCount} users left`
-
     console.log(users);
 
     return (
       <div>
-        <button onClick={() => this.setState({ show: this.generateUsers[Math.floor(Math.random() * usersCount)].show = false })}>
+        <button onClick={() => this.setState({ show: users[Math.floor(Math.random() * usersCount)].show = false })}>
           Delete Random
         </button>
 
         <div className='user_div'>
-          {users.map(users => {
+          {users.filter(person => person.show === true).map(users => {
             return (
               <button key={users.id2}>
                 <p key={users.name}><span className='span_user'>name: </span>  {users.name}</p>
@@ -49,45 +47,5 @@ class App extends React.Component {
     )
   }
 }
-
-
-// const App = () => {
-//   console.log(Car);
-//   const [users, generateUsers] = useState(Car.generateUsers0)
-
-//   let usersCount = users.length;
-//   document.title = `${usersCount} users left`;
-
-//   function DeleteUsers() {
-//     let min = 0;
-//     let max = users.length;
-
-//     let random = Math.floor(Math.random() * (max - min) + min);
-
-//     generateUsers(users.filter((_, index) => index !== random))
-//   }
-
-//   return (
-//     <>
-//       <button onClick={DeleteUsers}>
-//         Delete Random
-//       </button>
-
-//       <div className='user_div'>
-//         {users.map(users => {
-//           return (
-//             <button key={users.id2}>
-//               <p key={users.name}><span className='span_user'>name: </span>  {users.name}</p>
-//               <p key={users.lastName}><span className='span_user'>last name: </span>  {users.lastName}</p>
-//               <p key={users.age}><span className='span_user'>age: </span> {users.age}</p>
-//               <p key={users.id}><span className='span_user'>id: </span>  {users.id}</p>
-//             </button>
-//           )
-//         })}
-//       </div>
-
-//     </>
-//   )
-// }
 
 export default App
